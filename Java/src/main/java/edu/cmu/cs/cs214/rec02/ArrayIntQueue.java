@@ -77,12 +77,11 @@ public class ArrayIntQueue implements IntQueue {
     }
 
     /** {@inheritDoc} */
-    public Integer peek() {
+    public Integer peek() { // bug 2: peek() should return null when queue is empty
         if (isEmpty()) {
             return null;
         }
-        return elementData[head]; 
-        
+        return elementData[head];  
     }
 
     /** {@inheritDoc} */
@@ -95,7 +94,7 @@ public class ArrayIntQueue implements IntQueue {
      * necessary, to ensure that it can hold at least size + 1 elements.
      */
     private void ensureCapacity() {
-        if (size == elementData.length) {
+        if (size + 1 >= elementData.length) { // bug 3: size + 1 >= elementData.length
             int oldCapacity = elementData.length;
             int newCapacity = 2 * oldCapacity + 1;
             int[] newData = new int[newCapacity];
